@@ -1,18 +1,15 @@
 defmodule Skynet do
-  @moduledoc """
-  Documentation for Skynet.
-  """
+  alias Skynet.RobotSupervisor
 
-  @doc """
-  Hello world.
+  def robots do
+    RobotSupervisor.robots()
+  end
 
-  ## Examples
+  def spawn_robot do
+    RobotSupervisor.start_robot()
+  end
 
-      iex> Skynet.hello
-      :world
-
-  """
-  def hello do
-    :world
+  def kill_robot(robot) do
+    RobotSupervisor.kill_robot(robot)
   end
 end
