@@ -4,7 +4,7 @@ defmodule Skynet.Timer do
 
   def start_link(timer_id) do
     Logger.debug "start timer for >> #{timer_id}"
-    GenServer.start_link(fn -> %{start_time: NaiveDateTime.utc_now()} end, name: via_tuple(timer_id))
+    GenServer.start_link(__MODULE__, %{start_time: NaiveDateTime.utc_now()}, name: via_tuple(timer_id))
   end
 
   def start_time(timer_id) do

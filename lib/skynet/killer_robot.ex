@@ -49,7 +49,7 @@ defmodule Skynet.KillerRobot do
 
   def try_kill_robot(robot_id) do
     Logger.debug "try kill robot >> #{robot_id}"
-    Timer.start_time(kill_timer_name(robot_id)) |> IO.inspect
+    TimerSupervisor.timers(robot_id)
   end
 
   def try_reproduce_robot(robot_id) do
