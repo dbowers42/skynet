@@ -21,21 +21,20 @@ be found at [https://hexdocs.pm/skynet](https://hexdocs.pm/skynet).
 
 on the command line execute
 
-```
-iex -S mix
-```
+```iex -S mix```
 In iex it might be useful to do this
 
-```elixir
-  import Skynet
-```
+``` import Skynet```
 
 once you have done that you call:
 
-robots()          -- to list all remaining robots
-spawn_robot()     -- to create new robot with a random name
-kill_robot(robot) -- destroy a robot by its name
-hunt_robots()     -- to begin hunting robots if they have already been eliminated
+```robots()          -- to list all remaining robots```
+
+```spawn_robot()     -- to create new robot with a random name```
+
+```kill_robot(robot) -- destroy a robot by its name```
+
+```hunt_robots()     -- to begin hunting robots if they have already been eliminated```
 
 Note: currently when you start the app it will say that Sarah Connor has killed
 all remaining robots. That is because the app starts with 0 robots. Ideally there
