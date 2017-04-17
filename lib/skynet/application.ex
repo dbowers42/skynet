@@ -24,7 +24,7 @@ defmodule Skynet.Application do
     opts = [strategy: :one_for_one]
     Supervisor.start_link(children, opts)
 
-    for _ <- 1..3 do
+    for _ <- 1..10 do
       RobotSupervisor.start_robot()
     end
 

@@ -17,6 +17,8 @@ defmodule Skynet.TimerSupervisor do
 
   def timers(robot_id) do
     Supervisor.which_children(via_tuple(robot_id))
+    |> Enum.map(&(elem(&1,1)))
+    |> Enum.map(&Timer.timer_id(&1))
   end
 
   def add_timer(robot_id, timer_id) do
