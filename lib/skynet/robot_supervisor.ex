@@ -5,7 +5,6 @@ defmodule Skynet.RobotSupervisor do
   alias Skynet.KillerRobot
 
   def start_link(_opts) do
-    Logger.info "A new evil robot army has been spawned!"
     Supervisor.start_link(__MODULE__, %{}, name: __MODULE__)
   end
 
@@ -41,7 +40,21 @@ defmodule Skynet.RobotSupervisor do
     spawn_task = Task.async(&spawn_robots/0)
     kill_task = Task.async(&kill_robots/0)
     Task.yield_many([spawn_task, kill_task], run_timeout())
-    run()
+
+    display_remaining_robots()
+  end
+
+  def display_remaining_robots do
+    case robot_count() do
+      1 ->
+        Logger.info "Just 1 robot remains alive!"
+        run()
+      0 ->
+        Logger.info "Sarah Connor has killed all the robots!"
+      _ ->
+        Logger.info "#{robot_count()} still robots remain alive"
+        run()
+    end
   end
 
   def kill_robot(name) do
@@ -52,22 +65,20 @@ defmodule Skynet.RobotSupervisor do
     {:noreply, %{state | pid: pid}}
   end
 
+  defp robot_count do
+    robots() |> Enum.count()
+  end
+
   def handle_call(:pid, _from, state) do
     {:reply, state.pid, state}
   end
 
   defp kill_timeout do
-    count = robots()
-    |> Enum.count()
-
-    count * (KillerRobot.kill_robot_time_limit() + 100)
+    robot_count() * (KillerRobot.kill_robot_time_limit() + 100)
   end
 
   defp reproduce_timeout do
-    count = robots()
-    |> Enum.count()
-
-    count * (KillerRobot.reproduce_robot_time_limit() + 100)
+    robot_count() * (KillerRobot.reproduce_robot_time_limit() + 100)
   end
 
   defp run_timeout do
