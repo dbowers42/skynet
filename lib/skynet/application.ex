@@ -11,8 +11,12 @@ defmodule Skynet.Application do
       supervisor(RobotSupervisor, [[name: Skynet.RobotSupervisor, restart: :transient]]),
       worker(NameGenerator, [])
     ]
-
     opts = [strategy: :one_for_one]
-    Supervisor.start_link(children, opts)
+    result = Supervisor.start_link(children, opts)
+
+    RobotSupervisor.start_robot()
+    RobotSupervisor.run()
+
+    result
   end
 end
