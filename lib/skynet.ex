@@ -12,4 +12,8 @@ defmodule Skynet do
   def kill_robot(robot) do
     RobotSupervisor.kill_robot(robot)
   end
+
+  def hunt_robots do
+    Skynet.RobotRunner.restart()
+  end
 end

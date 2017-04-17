@@ -15,4 +15,8 @@ defmodule Skynet.RobotRunner do
 
     {:ok, state}
   end
+
+  def restart() do
+    Skynet.RobotSupervisor.run()
+  end
 end

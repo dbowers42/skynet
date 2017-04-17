@@ -52,7 +52,7 @@ defmodule Skynet.RobotSupervisor do
       0 ->
         Logger.info "Sarah Connor has killed all the robots!"
       _ ->
-        Logger.info "#{robot_count()} still robots remain alive"
+        Logger.info "#{robot_count()} robots still remain alive"
         run()
     end
   end
