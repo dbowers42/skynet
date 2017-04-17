@@ -4,15 +4,6 @@ defmodule Skynet.Application do
   alias Skynet.RobotSupervisor
   alias Skynet.NameGenerator
 
-  def make_robot do
-    job = fn ->
-      Process.sleep(1000)
-      IO.puts "make robot"
-    end
-
-    spawn(job)
-  end
-
   def start(_type, _args) do
     import Supervisor.Spec, warn: false
 
@@ -23,14 +14,5 @@ defmodule Skynet.Application do
 
     opts = [strategy: :one_for_one]
     Supervisor.start_link(children, opts)
-
-    for _ <- 1..10 do
-      RobotSupervisor.start_robot()
-    end
-
-
-
-
-    {:ok, self()}
   end
 end
