@@ -27,7 +27,6 @@ defmodule Skynet.KillerRobot do
   end
 
   def try_kill_robot(robot_id) do
-    Logger.info "try kill robot"
     Process.sleep(kill_robot_time_limit())
 
     if kill_robot?() do
