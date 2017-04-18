@@ -30,6 +30,7 @@ defmodule Skynet.Mixfile do
   # Type "mix help deps" for more examples and options
   defp deps do
     [{:credo, "~> 0.7.2"},
-     {:gproc, "~> 0.6.1"}]
+     {:gproc, "~> 0.6.1"},
+     {:logger_file_backend, "~> 0.0.9"}]
   end
 end
