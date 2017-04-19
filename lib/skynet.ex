@@ -8,15 +8,6 @@ defmodule Skynet do
     GenServer.start_link(__MODULE__, %{node_id: node_id}, name: __MODULE__)
   end
 
-  def connect() do
-    Node.connect(active_node())
-  end
-
-  def run(node_id) do
-    start_link(node_id)
-    connect()
-  end
-
   def active_node do
     GenServer.call(__MODULE__, :node_id)
   end

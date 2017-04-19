@@ -45,16 +45,17 @@ defmodule Skynet.RobotSupervisor do
   end
 
   def display_remaining_robots do
-    case robot_count() do
-      1 ->
+    count = robot_count()
+
+    cond do
+      count == 1 ->
         Logger.info "Just 1 robot remains alive!"
-        run()
-      0 ->
-        Logger.info "Sarah Connor has killed all the robots!"
-      _ ->
+      count > 0 ->
         Logger.info "#{robot_count()} robots still remain alive"
-        run()
+      true -> :ignore
     end
+
+    run()
   end
 
   def kill_robot(name) do

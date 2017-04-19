@@ -18,8 +18,8 @@ use Mix.Config
 #
 # Or configure a 3rd-party app:
 #
-  config :logger, backends: [{LoggerFileBackend, :activity_log}]
-  config :logger, :activity_log, path: "logs/activity.log", level: :info
+# config :logger, backends: [{LoggerFileBackend, :activity_log}]
+# config :logger, :activity_log, path: "logs/activity.log", level: :info
 #
 
 # It is also possible to import configuration files, relative to this

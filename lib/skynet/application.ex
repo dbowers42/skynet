@@ -6,14 +6,26 @@ defmodule Skynet.Application do
   alias Skynet.RobotRunner
 
   def start(_type, _args) do
-    import Supervisor.Spec, warn: false
+    skynet_server_node = System.get_env("SKYNET_SERVER_NODE") |> String.to_atom()
+    skynet_node_type = System.get_env("SKYNET_NODE_TYPE") |> String.to_atom()
 
-    children = [
-      supervisor(RobotSupervisor, [[name: Skynet.RobotSupervisor, restart: :transient]]),
-      worker(NameGenerator, []),
-      worker(RobotRunner, [])
-    ]
-    opts = [strategy: :one_for_one]
-    Supervisor.start_link(children, opts)
+    case skynet_node_type do
+      :server ->
+        Logger.info "Running Server #{node()}"
+        import Supervisor.Spec, warn: false
+
+        children = [
+          supervisor(RobotSupervisor, [[name: Skynet.RobotSupervisor, restart: :transient]]),
+          worker(NameGenerator, []),
+          worker(RobotRunner, []),
+          worker(Skynet, [skynet_server_node])
+        ]
+
+        Supervisor.start_link(children, strategy: :one_for_one)
+      :client ->
+        Logger.info "Running Client #{node()}"
+        Node.connect(skynet_server_node)
+        {:ok, self()}
+    end
   end
 end
