@@ -22,6 +22,12 @@ defmodule Skynet.RobotSupervisor do
     |> Enum.map(&KillerRobot.name(&1))
   end
 
+  def display_robots do
+    for robot <- robots() do
+      Logger.info robot
+    end
+  end
+
   def start_robot do
     Supervisor.start_child(__MODULE__, [Skynet.NameGenerator.generate_name])
   end
