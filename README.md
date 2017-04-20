@@ -19,25 +19,31 @@ be found at [https://hexdocs.pm/skynet](https://hexdocs.pm/skynet).
 
 ## Running
 
-on the command line execute
+#### Create two terminal windows
 
-```iex -S mix```
-In iex it might be useful to do this
+  In the first terminal window execute ```make server```.  Next, in the second terminal window execute ```make client```. The second terminal window will start an IEX session. Nothing will be happening at first, but you can interact with the IEX session.
 
-``` import Skynet```
+  #### Here are some commands
 
-once you have done that you call:
-
-```robots()          -- to list all remaining robots```
-
-```spawn_robot()     -- to create new robot with a random name```
-
-```kill_robot(robot) -- destroy a robot by its name```
-
-```hunt_robots()     -- to begin hunting robots if they have already been eliminated```
-
-Note: currently when you start the app it will say that Sarah Connor has killed
-all remaining robots. That is because the app starts with 0 robots. Ideally there
-are specific improvements I would like to make to interacting with the
-app. I have limited time to make those improvements right now, but we can
-certainly talk about what I would like to change.
+  <table>
+    <tr>
+      <th>Command</th>
+      <th>Action</th>
+    </tr>
+    <tr>
+      <td>Skynet.Client.start()</td>
+      <td><b>Always run this first</b> - starts up a new session to interact with skynet</td>
+    </tr>
+    <tr>
+      <td>Skynet.Client.spawn_robot()</td>
+      <td>Spawns a new killer robot with a random name</td>
+    </tr>
+    <tr>
+      <td>Skynet.Client.kill_robot(robot)</td>
+      <td>Destroys a killer robot with a matching name</td>
+    </tr>
+    <tr>
+      <td>Skynet.Client.robots()</td>
+      <td>Displays a list of robots that still remain alive</td>
+    </tr>
+  </table>
