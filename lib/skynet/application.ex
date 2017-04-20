@@ -17,8 +17,7 @@ defmodule Skynet.Application do
         children = [
           supervisor(RobotSupervisor, [[name: Skynet.RobotSupervisor, restart: :transient]]),
           worker(NameGenerator, []),
-          worker(RobotRunner, []),
-          worker(Skynet, [skynet_server_node])
+          worker(RobotRunner, [])
         ]
 
         Supervisor.start_link(children, strategy: :one_for_one)
