@@ -23,9 +23,9 @@ defmodule Skynet.RobotSupervisor do
   end
 
   def display_robots do
-    for robot <- robots() do
-      Logger.info robot
-    end
+    robots()
+    |> Enum.join("\n")
+    |> Logger.info
   end
 
   def start_robot do
